@@ -1,0 +1,49 @@
+FROM eclipse-temurin:17-jre-alpine
+ 
+WORKDIR /app
+ 
+# Non-root user for security
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+ 
+# Copy built JAR
+COPY --from=builder /app/target/*.jar app.jar
+ 
+RUN chown appuser:appgroup app.jar
+ 
+USER appuser
+ 
+EXPOSE 8080
+
+CMD ["java", "-jar", "app.jar"]
+
+------------------------------------------
+
+Your Dockerfile CMD
+
+CMD ["java", "-jar", "app.jar"]
+
+Override CMD at Runtime
+
+# Normal run — uses CMD
+docker run myapp
+# runs: java -jar app.jar ✅
+
+# Override CMD — run different jar
+docker run myapp java -jar other.jar
+# runs: java -jar other.jar ✅
+# app.jar ignored ❌
+
+# Override CMD — run shell instead
+docker run myapp sh
+# runs: sh ✅
+# java -jar app.jar ignored ❌
+
+# Override CMD — check java version
+docker run myapp java -version
+# runs: java -version ✅
+# app.jar ignored ❌
+
+# Override CMD — list files
+docker run -it myapp ls -la
+# runs: ls -la ✅
+# java -jar app.jar ignored ❌
