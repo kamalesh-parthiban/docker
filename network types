@@ -1,0 +1,19 @@
+Docker has 5 network types:
+
+Bridge (default) — Containers on the same host communicate via a virtual network. Most common for local dev.
+Host — Container shares the host's network directly. No isolation, best for performance.
+None — No networking at all. Container is completely isolated.
+Overlay — Connects containers across multiple hosts (used in Docker Swarm).
+Macvlan — Assigns a real MAC address to container, making it appear as a physical device on the network.
+
+Most used in practice:
+
+Single host dev/testing  → Bridge
+High performance needed  → Host
+Multi-host production    → Overlay
+
+# List all networks
+docker network ls
+
+# Create bridge network
+docker network create my-network
