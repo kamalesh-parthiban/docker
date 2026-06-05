@@ -9,4 +9,5 @@ EXPOSE 8080                           # Layer 7 — exposes port (metadata only)
 HEALTHCHECK ...                       # Layer 8 — health check (metadata only)
 ENTRYPOINT ["java", "-jar", "app.jar"] # Layer 9 — run command (metadata only)
 
-Only FROM, RUN, COPY, WORKDIR and USER create actual layers that consume disk space. EXPOSE, HEALTHCHECK and ENTRYPOINT are just metadata — they don't add any size to the image.
+Only FROM, RUN, COPY, WORKDIR and USER create actual layers that consume disk space. EXPOSE, HEALTHCHECK and ENTRYPOINT are just metadata — 
+they don't add any size to the image.
