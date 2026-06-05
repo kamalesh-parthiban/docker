@@ -1,0 +1,68 @@
+Best ways to reduce Docker image size are using alpine base image, multi-stage builds to separate build and runtime stages,
+combining RUN commands to reduce layers, and using .dockerignore to exclude unnecessary files. ✅
+
+1. Use Minimal Base Image (Biggest impact)
+
+# Option 1 — Worst ❌ (~600MB+)
+FROM ubuntu:latest
+# manually install java yourself
+
+# Option 2 — Bad ❌ (~400MB+)
+FROM openjdk:17
+
+# Option 3 — Better ✅ (~200MB)
+FROM eclipse-temurin:17-jre
+
+# Option 4 — Best ✅ (~150MB)
+FROM eclipse-temurin:17-jre-alpine
+
+2. Multi-Stage Build (Most recommended)
+
+# Stage 1 — Build
+FROM maven:3.9-eclipse-temurin-17 AS builder
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# Stage 2 — Run (only copy JAR, not entire maven/JDK)
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+COPY --from=builder /app/target/myapp.jar app.jar
+EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]
+
+3. Combine RUN commands
+
+# Bad — creates 3 layers ❌
+RUN apt-get update
+RUN apt-get install -y curl
+RUN apt-get clean
+
+# Good — single layer ✅
+RUN apt-get update && \
+    apt-get install -y curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+4. Use .dockerignore
+
+# .dockerignore
+node_modules/
+target/
+*.log
+.git/
+*.md
+test/
+
+Check image size:
+
+# See all image sizes
+docker images
+
+# Inspect image layers
+docker history myapp:latest
+
+# Detailed layer analysis
+docker inspect myapp:latest
+----------------------------------------------------------------
