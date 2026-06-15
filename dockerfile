@@ -95,6 +95,14 @@ EXPOSE      Documents which port container listens on
             EXPOSE 8080 9090  (multiple ports)
             NOTE: Does not actually publish the port, just documents it
 
+Actual port exposure = -p flag in docker run:
+
+# this actually exposes port ✅
+docker run -p 8080:8080 my-app
+
+# format: -p host_port:container_port
+docker run -p 80:8080 my-app    # host:80 → container:8080
+
 --------------------------------------------------------------------------------
 5. EXECUTION
 --------------------------------------------------------------------------------
