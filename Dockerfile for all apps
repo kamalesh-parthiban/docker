@@ -1,6 +1,6 @@
 Java dependencies → mvn install or gradle build
-Node.js dependencies → npm install
-Python dependencies → pip install
+Node.js dependencies → npm install (Node Package Manager)
+Python dependencies → pip install (pip install requests)
 OS packages → yum install or apt-get install
 ------------------------------------------
 
