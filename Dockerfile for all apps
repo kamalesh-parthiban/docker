@@ -89,3 +89,9 @@ pandas
 boto3
 
 from requirements.txt.
+---
+COPY . .  copies:
+  ✅ app.py
+  ✅ requirements.txt (again)
+  ✅ config.yaml
+  ✅ everything in local folder
