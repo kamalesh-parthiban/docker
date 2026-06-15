@@ -15,6 +15,12 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+# source      = . → your local machine current folder
+#                   everything in it
+# destination = . → current WORKDIR inside container
+#                   which is /app
+
+# Same as: COPY . /app         # explicit version ✅
 
 EXPOSE 3000
 
@@ -33,6 +39,17 @@ So if your package.json has:
     "mongoose": "^8.0.0"
   }
 }
+2 COPY = Docker layer caching trick ✅
+
+COPY package.json first:
+  dependencies cached ✅
+  npm install skipped ✅
+  saves time on every build ✅
+
+COPY . . after:
+  source code copied last
+  only rebuilds when
+  code changes ✅
 
 -------------------
 Java (Spring Boot)
