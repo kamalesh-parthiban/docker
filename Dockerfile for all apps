@@ -1,0 +1,74 @@
+Java dependencies → mvn install or gradle build
+Node.js dependencies → npm install
+Python dependencies → pip install
+OS packages → yum install or apt-get install
+------------------------------------------
+
+Node.js
+----------
+
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
+
+--------
+npm install
+
+It installs all Node.js dependencies listed in your package.json file.
+
+So if your package.json has:
+
+{
+  "dependencies": {
+    "express": "^4.18.0",
+    "mongoose": "^8.0.0"
+  }
+}
+
+-------------------
+Java (Spring Boot)
+-------------
+
+FROM eclipse-temurin:21-jre
+
+WORKDIR /app
+
+COPY target/app.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
+---------------------
+Python
+---------------
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD ["python", "app.py"]
+------------------------------
+
+installs Python libraries such as:
+
+flask
+requests
+pandas
+boto3
+
+from requirements.txt.
