@@ -306,6 +306,14 @@ myusernameyour     --       Docker Hub username
 ----------------------------------------------------
 docker run -p 8080:8080 username/image:tag
 
+docker run   -p   8080  :  8080   username/image:tag
+              │    │         │         │
+              │  host      container  image to pull & run
+           publish  port     port
+           flag
+
+hostPort can be any port number from 1 to 65535.
+
 docker push username/image:tag
 
 docker pull username/image:tag
