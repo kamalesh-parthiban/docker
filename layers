@@ -11,3 +11,15 @@ ENTRYPOINT ["java", "-jar", "app.jar"]         # Layer 9 — run command (metada
 
 Only FROM, RUN, COPY, WORKDIR and USER create actual layers that consume disk space. EXPOSE, HEALTHCHECK and ENTRYPOINT are just metadata — 
 they don't add any size to the image.
+
+FROM ubuntu:22.04          → adds size    (base image ~77MB)
+RUN apt-get install java   → adds size    (new layer with files)
+COPY app.jar /app/         → adds size    (copies file into image)
+ADD config.tar.gz /etc/    → adds size    (extracts + copies files)
+
+WORKDIR /app               → NO size      (just sets working dir)
+ENV JAVA_HOME=/usr/java    → NO size      (just metadata)
+EXPOSE 8080                → NO size      (just documentation)
+LABEL version="1.0"        → NO size      (just metadata)
+CMD ["java", "-jar", ...] → NO size      (just run instruction)
+ENTRYPOINT ["java"]        → NO size      (just run instruction)
