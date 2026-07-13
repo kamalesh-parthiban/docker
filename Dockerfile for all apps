@@ -116,3 +116,97 @@ Common ports you'll see depending on framework/language:
 | React dev server     | 3000                 |
 | NGINX                | 80                   |
 +----------------------+----------------------+
+
+Comparison
+
++-----------------------------+--------------------------------------+
+| Java Application            | Node.js Application                  |
++-----------------------------+--------------------------------------+
+| Language: Java              | Language: JavaScript                 |
++-----------------------------+--------------------------------------+
+| Runtime: Java (JRE/JDK)     | Runtime: Node.js                     |
++-----------------------------+--------------------------------------+
+| Package: .jar               | .js files + node_modules             |
++-----------------------------+--------------------------------------+
+| Start command:              | Start command:                       |
+| java -jar app.jar           | node index.js                        |
+|                             | or                                  |
+|                             | npm start                            |
++-----------------------------+--------------------------------------+
+
+
+Here's a comparison:
+
++-------------------------------------------+------------------------------------------------------+
+| JavaScript (Node.js)                      | Java                                                 |
++-------------------------------------------+------------------------------------------------------+
+| Source files like                         | Source files like                                    |
+| index.js, app.js                          | Main.java                                            |
++-------------------------------------------+------------------------------------------------------+
+| Executed by Node.js                       | Compiled into .class files, then packaged as a .jar  |
++-------------------------------------------+------------------------------------------------------+
+| Run with                                  | Run with                                             |
+| node index.js                             | java -jar app.jar                                    |
++-------------------------------------------+------------------------------------------------------+
+--------
+Node.js
+----------
+index.js
+    │
+    ▼
+node index.js
+------------------------------
+java
+-----
+
+.java
+   │
+   ▼
+.class
+   │
+   ▼
+app.jar
+
+If your project has many .class files:
+
+Main.class
+User.class
+Order.class
+Product.class
+
+You package them together into a single JAR:
+
+app.jar
+
+A JAR is essentially a ZIP archive that contains:
+
+• .class files
+• Configuration files
+• Resources (images, properties, etc.)
+• Metadata
+
+mvn clean
+
+Deletes the previous build output (usually the target/ directory).
+
+Before:
+
+project/
+├── src/
+├── pom.xml
+└── target/
+    ├── app.jar
+    └── Main.class
+
+After:
+
+project/
+├── src/
+└── pom.xml
+
+Maven:
+
+1. Reads your .java files.
+2. Compiles them into .class files.                 -- compile      (.java → .class)
+3. Runs tests (unless skipped).                     -- test         (Run unit tests)
+4. Packages the compiled files into a .jar.         -- package      (.class → .jar)
