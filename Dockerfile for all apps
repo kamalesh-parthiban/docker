@@ -100,3 +100,17 @@ COPY . .  copies:
   ✅ requirements.txt (again)
   ✅ config.yaml
   ✅ everything in local folder
+----------------
+
+Common ports you'll see depending on framework/language:
+
++----------------------+----------------------+
+| Framework/Language   | Typical default port |
++----------------------+----------------------+
+| Express (Node.js)    | 3000                 |
+| Spring Boot (Java)   | 8080                 |
+| Flask (Python)       | 5000                 |
+| Django (Python)      | 8000                 |
+| React dev server     | 3000                 |
+| NGINX                | 80                   |
++----------------------+----------------------+
