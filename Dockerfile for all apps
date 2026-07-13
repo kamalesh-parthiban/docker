@@ -51,6 +51,11 @@ COPY . . after:
   only rebuilds when
   code changes ✅
 
+✅ index.js / app.js (your main server file)
+✅ routes/, controllers/, models/ (your app folders)
+✅ .env (if not excluded via .dockerignore — careful, often you WANT to exclude this)
+✅ package.json, package-lock.json (again — harmless, already copied, just re-copied)
+❌ node_modules from your LOCAL machine — this should be excluded via .dockerignore,
 -------------------
 Java (Spring Boot)
 -------------
