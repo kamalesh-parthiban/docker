@@ -306,13 +306,16 @@ myusernameyour     --       Docker Hub username
 ----------------------------------------------------
 docker run -p 8080:8080 username/image:tag
 
-docker run   -p   8080  :  8080   username/image:tag
+docker run   -p   8080  :  8080   username/image:tag --name myapp 
               │    │         │         │
               │  host      container  image to pull & run
            publish  port     port
            flag
 
 hostPort can be any port number from 1 to 65535.
+
+No, --name is optional. Without it, Docker auto-generates a random name (like happy_einstein) for the container.
+Add --name only if you want to reference it easily later:
 
 docker push username/image:tag
 
